@@ -81,10 +81,10 @@ public class PaintView2 extends View {
 
         mPath = new Path();
 
-        mBitmap = Bitmap.createBitmap(SCREEN_W, SCREEN_H, Bitmap.Config.ALPHA_8);
-        mBitmap.setHasAlpha(false);//告诉
+        mBitmap = Bitmap.createBitmap(SCREEN_W, SCREEN_H, Bitmap.Config.ARGB_8888);
+        mBitmap.setHasAlpha(true);//告诉图片没有alpha通道,即使配置有alpha的通道
         mCanvas = new Canvas(mBitmap);
-//        mCanvas.drawColor(Color.BLUE);
+        mCanvas.drawColor(Color.BLUE);
     }
 
     private void init() {
