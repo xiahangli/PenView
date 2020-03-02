@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+<!--    <com.example.penview.Re-->
+<!--        android:progress="20"-->
+<!--        android:max="100"-->
+<!--        style="@style/Widget.AppCompat.ProgressBar.Horizontal"-->
+<!--        android:layout_width="200dp"-->
+<!--        android:layout_height="20dp"/>-->
+<!--    <com.example.penview.RegionView-->
+<!--        android:id="@+id/pen_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+<com.example.penview.PaintView2
+    android:id="@+id/gl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/clear_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/holo_blue_light"
+        android:padding="15dp"
+        android:text="橡皮"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        /> <TextView
+        android:id="@+id/clear_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/holo_blue_light"
+        android:padding="15dp"
+    android:layout_toRightOf="@id/clear_tv"
+        android:text="画笔"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+    <TextView
+        android:id="@+id/clear_tv2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@android:color/holo_blue_light"
+        android:padding="15dp"
+        android:layout_toRightOf="@id/clear_tv1"
+        android:text="qingkogn"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
+</RelativeLayout>
