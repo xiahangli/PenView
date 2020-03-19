@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class PathView extends View {
     private static final String TAG = "PathView";
-    private final Path mPath;
+    private  Path mPath;
     private List<Path> mPathList = new ArrayList<>();
     private Paint mPaint = new Paint();
     //临时路径
@@ -61,7 +61,7 @@ public class PathView extends View {
         setFocusable(true);
         setFocusableInTouchMode(true);
         mPaint.setColor(0xff00ff00);
-        mPaint.setStrokeWidth(5);//会影响宽度，哪怕是path.addOval或mPath.addCircle
+        mPaint.setStrokeWidth(20);//会影响宽度，哪怕是path.addOval或mPath.addCircle
         mPaint.setStyle(Paint.Style.STROKE);//不要空心，填充路径
         mPaint.setStrokeCap(Paint.Cap.ROUND);
         mPaint.setStrokeJoin(Paint.Join.ROUND);
@@ -79,7 +79,9 @@ public class PathView extends View {
         });
 //        bitmapWidth = bitmap.getWidth();
 //        bitmapHeight = bitmap.getHeight();
-//        mPath.moveTo(0, 0);
+
+
+//        mPath.quadTo(100,100,(200+100)/2f,(200+100)/2f);
 //        mPath.lineTo(100, 100);
         measure(0, 0);
         mViewHeight = getMeasuredWidth();
@@ -149,11 +151,64 @@ public class PathView extends View {
         //通过measureSpec.getSize得到具体的size尺寸信息
         mViewHeight = MeasureSpec.getSize(heightMeasureSpec);
         mViewWidth = MeasureSpec.getSize(widthMeasureSpec);
+        if (mViewWidth!=0){
+            flag = true;
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        Paint paint = mPaint;
+        Paint paint = new Paint(mPaint);
+        paint.setColor(Color.RED);
+        paint.setStyle(Paint.Style.FILL);
+        paint.setStrokeWidth(8);
+        //(0,50),(50,0),(100,50),(150,100),(200,50)
+        mPaint.setAlpha(10);
+//0
+        if (flag){
+//            flag/ = false;
+            System.out.println("===============");
+            canvas.drawPoint(0f,500f,paint);
+            mPaint.setColor(Color.CYAN);
+            mPath.moveTo(0, 500);
+
+//1
+            canvas.drawPoint(100,0,paint);
+            mPath.quadTo(0,500,(0+100)/2f,(500+0)/2);
+            canvas.drawPath(mPath,mPaint);
+
+//            mPa th.reset();
+//            mPaint.setColor(Color.RED);
+//            Path mPath2 = new Path();
+//            mPath2.moveTo(0,500);
+//            mPath2.lineTo(100,0);
+//            canvas.drawPath(mPath2,mPaint);
+
+//            mPaint.setColor(Color.CYAN);
+//            canvas.drawPath(mPath,mPaint);
+//2
+            canvas.drawPoint(200,500,paint);
+            mPath.quadTo(100,0,(100+200)/2f,(0+500)/2);
+//            canvas.drawPath(mPath,mPaint);
+//3
+//            canvas.drawPoint(150,100,paint);
+//            mPath.quadTo(100,50,(100+150)/2,(50+100)/2);
+//4
+//            canvas.drawPoint(200,50,paint);
+//            mPath.quadTo(150,100,(150+200)/2,(100+50)/2);
+
+//5
+//            canvas.drawPoint(250,0,paint);
+//            mPath.quadTo(200,50,(200+250)/2,(50+0)/2);
+
+//            canvas.drawPoint(300,50,paint);
+//            mPath.quadTo(250,0,(250+300)/2,(0+50)/2);
+
+//            canvas.drawPoint(350,100,paint);
+//            mPath.quadTo(300,50,(300+350)/2,(50+100)/2);
+//        canvas.drawPath(mPath,mPaint);
+        }
+
 //        paint.setColor(Color.RED);
 //        canvas.drawColor(0xFF00CCCC);//画背景画布的canvas
 ////        canvas.translate(20, 20);
@@ -254,7 +309,7 @@ public class PathView extends View {
 //        dst.transform(matrix);
 //        canvas.drawPath(dst, paint);
 //        canvas.drawPath(tempPath, mPaint);
-            canvas.drawBitmap(mDrawBitmap,0,0,null);
+//            canvas.drawBitmap(mDrawBitmap,0,0,null);
     }
 
 

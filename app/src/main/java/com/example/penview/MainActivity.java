@@ -1,6 +1,7 @@
 package com.example.penview;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -14,6 +15,8 @@ import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.sub.crop.activity.PictureCropActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     PullView pullView;
@@ -26,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mPenView = findViewById(R.id.gl);
+//        mPenView = findViewById(R.id.gl);
 //        openGLVIew = findViewById(R.id.gl);
         findViewById(R.id.clear_tv).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 mPenView.setMode(PaintView2.Eraser);
             }
         });
+        startActivity(new Intent(this, PictureCropActivity.class));
         findViewById(R.id.clear_tv1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
