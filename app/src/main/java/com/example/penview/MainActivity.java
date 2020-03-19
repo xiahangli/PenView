@@ -38,7 +38,12 @@ public class MainActivity extends AppCompatActivity {
                 mPenView.setMode(PaintView2.Eraser);
             }
         });
-        startActivity(new Intent(this, PictureCropActivity.class));
+        Intent intent = new Intent(MainActivity.this, PictureCropActivity.class);
+        intent.putExtra("output_path","/sdcard/");
+        intent.putExtra("output_format","PNG");
+        intent.putExtra("crop_source","");
+//        intent.putExtra("crop_source","");
+        startActivity(intent);
         findViewById(R.id.clear_tv1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
