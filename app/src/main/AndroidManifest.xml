@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.penview">
-
+<uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
 
 <!--    使用纹理压缩compression formats your app supports,-->

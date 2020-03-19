@@ -1,11 +1,14 @@
 package com.example.penview;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -14,8 +17,10 @@ import android.view.View;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
-import com.sub.crop.activity.PictureCropActivity;
+import com.cnstrong.common.utils.SharedPreferenceUtils;
+import com.sub.crop.activity.CameraTakeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,12 +28,29 @@ public class MainActivity extends AppCompatActivity {
 //    private PaintView mPenView;
     private PaintView2 mPenView;
     OpenGLVIew openGLVIew;
-
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ,Manifest.permission.RECORD_AUDIO};
+    //请求状态码
+    private static int REQUEST_PERMISSION_CODE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
+            }
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
+            }
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_PERMISSION_CODE);
+            }
+        }
 //        mPenView = findViewById(R.id.gl);
 //        openGLVIew = findViewById(R.id.gl);
         findViewById(R.id.clear_tv).setOnClickListener(new View.OnClickListener() {
@@ -38,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                 mPenView.setMode(PaintView2.Eraser);
             }
         });
-        Intent intent = new Intent(MainActivity.this, PictureCropActivity.class);
+        SharedPreferenceUtils.init(this.getApplication(),"xiahangli");
+        Intent intent = new Intent(MainActivity.this, CameraTakeActivity.class);
         intent.putExtra("output_path","/sdcard/");
         intent.putExtra("output_format","PNG");
         intent.putExtra("crop_source","");
